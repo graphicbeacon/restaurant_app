@@ -4,12 +4,12 @@ import 'package:provider/provider.dart';
 import 'api.dart';
 import 'app_state.dart';
 
-class SearchFilters extends StatefulWidget {
+class SearchFilterScreen extends StatefulWidget {
   @override
-  _SearchFiltersState createState() => _SearchFiltersState();
+  _SearchFilterScreenState createState() => _SearchFilterScreenState();
 }
 
-class _SearchFiltersState extends State<SearchFilters> {
+class _SearchFilterScreenState extends State<SearchFilterScreen> {
   @override
   Widget build(BuildContext context) {
     final api = Provider.of<ZomatoApi>(context);

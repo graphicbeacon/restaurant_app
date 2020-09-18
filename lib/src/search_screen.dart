@@ -3,19 +3,19 @@ import 'package:provider/provider.dart';
 
 import 'api.dart';
 import 'app_state.dart';
-import './search_form.dart';
-import './restaurant_item.dart';
+import 'search_form.dart';
+import 'restaurant_item.dart';
 
-class SearchPage extends StatefulWidget {
-  SearchPage({Key key, this.title}) : super(key: key);
+class SearchScreen extends StatefulWidget {
+  SearchScreen({Key key, this.title}) : super(key: key);
 
   final String title;
 
   @override
-  _SearchPageState createState() => _SearchPageState();
+  _SearchScreenState createState() => _SearchScreenState();
 }
 
-class _SearchPageState extends State<SearchPage> {
+class _SearchScreenState extends State<SearchScreen> {
   String query;
 
   @override
