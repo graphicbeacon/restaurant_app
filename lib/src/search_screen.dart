@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:dio/dio.dart';
+import 'package:provider/provider.dart';
 
-import './search_filters_screen.dart';
+import 'api.dart';
+import 'app_state.dart';
 import './search_form.dart';
 import './restaurant_item.dart';
 
 class SearchPage extends StatefulWidget {
-  SearchPage({Key key, this.title, this.dio}) : super(key: key);
+  SearchPage({Key key, this.title}) : super(key: key);
 
   final String title;
-  final Dio dio;
 
   @override
   _SearchPageState createState() => _SearchPageState();
@@ -17,18 +17,12 @@ class SearchPage extends StatefulWidget {
 
 class _SearchPageState extends State<SearchPage> {
   String query;
-  SearchOptions _filters;
-
-  Future<List> searchRestaurants(String query) async {
-    final response = await widget.dio.get('search', queryParameters: {
-      'q': query,
-      ...(_filters != null ? _filters.toJson() : {}),
-    });
-    return response.data['restaurants'];
-  }
 
   @override
   Widget build(BuildContext context) {
+    final api = Provider.of<ZomatoApi>(context);
+    final state = Provider.of<AppState>(context);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
@@ -40,15 +34,7 @@ class _SearchPageState extends State<SearchPage> {
         actions: [
           InkWell(
             onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                    builder: (context) => SearchFilters(
-                          dio: widget.dio,
-                          onSetFilters: (filters) {
-                            _filters = filters;
-                          },
-                        )),
-              );
+              Navigator.pushNamed(context, 'filters');
             },
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15),
@@ -92,7 +78,7 @@ class _SearchPageState extends State<SearchPage> {
                     ),
                   )
                 : FutureBuilder(
-                    future: searchRestaurants(query),
+                    future: api.searchRestaurants(query, state.searchOptions),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
                         return Center(

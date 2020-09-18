@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-import './search_screen.dart';
-import './client.dart';
+import 'search_screen.dart';
+import 'search_filters_screen.dart';
 
 class RestaurantSearchApp extends StatelessWidget {
   // This widget is the root of your application.
@@ -14,10 +14,11 @@ class RestaurantSearchApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SearchPage(
-        title: 'Restaurant App',
-        dio: dio,
-      ),
+      initialRoute: 'home',
+      routes: {
+        'home': (context) => SearchPage(title: 'Restaurant App'),
+        'filters': (context) => SearchFilters(),
+      },
     );
   }
 }
