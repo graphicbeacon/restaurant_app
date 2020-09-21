@@ -2,7 +2,8 @@
 
 A restaurant search app built with Zomato API and Flutter.
 
-![Restaurant App Screenshot](assets/restaurant_app.png)
+![Restaurant App Screenshot](raw/appshot_1.png)
+![Restaurant App Screenshot 2](raw/appshot_2.png)
 
 ## Getting Started
 
